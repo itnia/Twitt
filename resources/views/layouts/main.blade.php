@@ -17,7 +17,7 @@
         });
     </script>
 
-    @include('layouts.nav')
+    @include('section.nav')
     @yield('content')
 
     <script>
