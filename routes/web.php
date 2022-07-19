@@ -12,10 +12,23 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Http\Controllers\AuthController;
 
-Route::get('/', function () {
-    return 'Home';
-});
+Route::view('/login', 'layouts.login')->name('login');
+Route::post('/login', [AuthController::class, 'auth'])->name('login.auth');
+Route::delete('/login', [AuthController::class, 'destroy']);
+
+Route::view('/registration', 'layouts.reg')->name('registration');
+Route::post('/registration', [AuthController::class, 'reg'])->name('registration.store');
+
 
 use App\Http\Controllers\MessageController;
-Route::apiResource('/messages', MessageController::class);
+
+Route::middleware('auth')->group(function () {
+    //
+    Route::get('/', function () {
+        return view('home', ['jobs' => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]]);
+    })->name('home');
+
+    Route::apiResource('/messages', MessageController::class);
+});

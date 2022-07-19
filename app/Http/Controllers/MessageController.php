@@ -14,7 +14,7 @@ class MessageController extends Controller
     public function index()
     {
         //
-        return '$user';
+        return 'Home_Twitt';
     }
 
     /**
