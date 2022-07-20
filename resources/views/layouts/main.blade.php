@@ -8,7 +8,7 @@
     <title>@yield('title')</title>
 </head>
 <body>
-    <div class="container mt-5">
+    <div class="container">
         <div class="row">
             <div class="col-1"></div>
             <div class="col-2">

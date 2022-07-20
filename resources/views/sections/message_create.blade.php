@@ -1,9 +1,14 @@
 <div>
-    <form action="/message" method="post">
+    <form action="/messages" method="post">
         @csrf
         @method('post')
-        <input type="text" name="message" id="">
-        <input type="submit" value="Отправить">
+        <div>
+            <textarea class="form-control" id="textAreaExample3" rows="1" name="message"></textarea>
+        </div>
+        <div class="mt-2">
+            <input type="submit" value="Отправить" class="float-end">
+        </div>
+
     </form>
 </div>
 

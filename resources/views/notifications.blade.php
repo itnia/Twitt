@@ -1,14 +1,10 @@
 @extends('layouts.main')
 
-@section('title', 'Главная')
+@section('title', 'Уведомления')
 
 @section('content')
     <div class="col-5">
-        <h2>Главная</h2>
-        @include('sections.message_create')
-        <br>
-        <hr>
-        @each('sections.message_show', $messages, 'message')
+        <h2>Уведомления</h2>
     </div>
     <div class="col-3">
         @include('sections.current_topics')

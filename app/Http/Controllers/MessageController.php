@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Message;
+use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
@@ -24,8 +26,15 @@ class MessageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {        
+        $request->validate([
+            'message' => 'required',
+        ]);
+        $message = new Message;
+        $message->message = $request->message;
+        $message->user_id = Auth::id();
+        $message->save();
+        return redirect()->route('home');
     }
 
     /**
