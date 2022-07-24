@@ -3,8 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\SubscriptionsController;
-use App\Models\Message;
+use App\Http\Controllers\AuthController;
 
+use App\Models\Message;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,31 +16,24 @@ use App\Models\Message;
 | contains the "web" middleware group. Now create something great!
 |
 */
-use App\Http\Controllers\AuthController;
 
 Route::view('/login', 'layouts.login')->name('login');
 Route::post('/login', [AuthController::class, 'auth'])->name('login.auth');
 Route::delete('/login', [AuthController::class, 'destroy']);
-
 Route::view('/registration', 'layouts.reg')->name('registration');
 Route::post('/registration', [AuthController::class, 'reg'])->name('registration.store');
 
 Route::middleware('auth')->group(function () {
-    //
-    Route::get('/', function () {
-        return view('home', ['messages' => Message::all()]);
-    })->name('home');
-    Route::view('/explore', 'explore');
-    Route::view('/notifications', 'notifications');
-    Route::view('/correspondence', 'correspondence');
-    Route::view('/bookmarks', 'bookmarks');
+    // Navigation
+    Route::get('/', [MessageController::class, 'index'])->name('home');
+    Route::get('/subscriptions', [SubscriptionsController::class, 'index'])->name('subscriptions');
+    Route::get('/{user}/status/{id}', [MessageController::class, 'show']);
 
-    Route::get('/subscriptions', [SubscriptionsController::class, 'index']);
-
-
-
-    Route::view('/{user}/lists', 'lists')->name('lists');
-    Route::view('/{user}', 'profile')->name('profile');
-
+    //Messages
     Route::apiResource('/messages', MessageController::class);
+    Route::post('/messages/like/{id}', [MessageController::class, 'like']);
+    
+    // Subscriptions
+    Route::post('/subscriptions', [SubscriptionsController::class, 'store']);
+    Route::delete('/subscriptions', [SubscriptionsController::class, 'destroy']);
 });

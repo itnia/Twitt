@@ -22,6 +22,9 @@
                 <input type="password" class="form-control" id="exampleInputPassword1" name="password">
             </div>
             <button type="submit" class="btn btn-primary">Регистрация</button>
+            @error('name')
+                {{ $message }}
+            @enderror
         </form>
         <hr>
 

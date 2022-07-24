@@ -1,18 +1,14 @@
 <div>
-	{{ $message->message }}
+    {{ $message->message }}
 </div>
 <div>
-	<button>Коментарии</button>
-	<button>Ретвиты</button>
-	<button>Лайки</button>
-	<button>Закладки</button>
+    <form action="/messages/like/{{ $message->id }}" method="post">
+        @csrf
+        @method('post')
+        <button>
+            Лайки{{ $message->likes }}
+        </button>
+    </form>
+    <a href="/{{ $message->user->name }}/status/{{ $message->id }}">Сылка</a>
 </div>
 <hr>
-
-@once
-    @push('scripts')
-        <script>
-            // Ваш JavaScript...
-        </script>
-    @endpush
-@endonce

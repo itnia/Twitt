@@ -15,12 +15,16 @@ class AuthController extends Controller
             'password' => 'required',
             'name' => 'required'
         ]);
+        $user = User::where('name', $credentials['name'])->first();
 
-        $user = User::create($credentials);
-        // if($user){
-        //     Auth::login($user);
-        // }
-        return 'okey_auth';
+        if (isset($user->name)) {
+            return back()->withErrors([
+                'name' => 'Имя зането',
+            ]);
+        }
+
+        User::create($credentials);
+        return redirect()->intended('home');
     }
 
     public function auth(Request $request)
