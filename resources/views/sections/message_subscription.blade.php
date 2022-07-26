@@ -1,0 +1,1 @@
+@each('sections.message_show', $messages, 'message')

@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\SubscriptionsController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MessageSubscription;
+use App\Http\Controllers\MessageComment;
 
 use App\Models\Message;
 /*
@@ -25,9 +27,14 @@ Route::post('/registration', [AuthController::class, 'reg'])->name('registration
 
 Route::middleware('auth')->group(function () {
     // Navigation
-    Route::get('/', [MessageController::class, 'index'])->name('home');
+    Route::redirect('/', '/home');
+    Route::view('/home', 'home');
     Route::get('/subscriptions', [SubscriptionsController::class, 'index'])->name('subscriptions');
     Route::get('/{user}/status/{id}', [MessageController::class, 'show']);
+
+    // Filling_Navigation
+    Route::get('/message_subscription', MessageSubscription::class);
+    Route::get('/{id}/message_comment', MessageComment::class);
 
     //Messages
     Route::apiResource('/messages', MessageController::class);

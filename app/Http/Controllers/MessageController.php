@@ -13,15 +13,7 @@ class MessageController extends Controller
 
     public function index()
     {
-        // отоброжать все сообщения по подписке и свои
-        $subscriptions = Subscription::where('user_id', Auth::id())->get();
-        $arr = [Auth::id()];
-        foreach ($subscriptions as $subscription){
-            $arr[] = $subscription->subscription_id;
-        }
-        $messages = Message::whereNull('message_id')->whereIn('user_id', $arr)->orderBy('id', 'desc')->get();
-
-        return view('home', ['messages' => $messages]);
+        // отоброжение в профиле только своих сообщений и коментариев
     }
 
 
@@ -36,20 +28,20 @@ class MessageController extends Controller
         $message->user_id = Auth::id();
         $message->message_id = $request->message_id;
         $message->save();
+        // render удалить после подключения ajax
         if(isset($request->message_id)){
             return view('status', [
                 'message' => Message::find($request->message_id),
                 'comments' => Message::where('message_id', '=', $request->message_id)->orderBy('id', 'desc')->get()
             ]);
         }
-        return redirect()->route('home');
     }
 
 
     public function show(Request $request, $user, $id)
     {
-        // отоброжение одного сообщения с коментариями
-        return view('status', ['message' => Message::find($id), 'comments' => Message::where('message_id', '=', $id)->orderBy('id', 'desc')->get()]);
+        // отоброжение одного сообщения
+        return view('status', ['message' => Message::find($id)]);
     }
 
 
