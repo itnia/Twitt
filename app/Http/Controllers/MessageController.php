@@ -18,8 +18,7 @@ class MessageController extends Controller
 
 
     public function store(Request $request)
-    {       
-        // сохронение сообщения и коментария
+    {
         $request->validate([
             'message' => 'required',
         ]);
@@ -28,19 +27,11 @@ class MessageController extends Controller
         $message->user_id = Auth::id();
         $message->message_id = $request->message_id;
         $message->save();
-        // render удалить после подключения ajax
-        if(isset($request->message_id)){
-            return view('status', [
-                'message' => Message::find($request->message_id),
-                'comments' => Message::where('message_id', '=', $request->message_id)->orderBy('id', 'desc')->get()
-            ]);
-        }
     }
 
 
     public function show(Request $request, $user, $id)
     {
-        // отоброжение одного сообщения
         return view('status', ['message' => Message::find($id)]);
     }
 
@@ -74,6 +65,7 @@ class MessageController extends Controller
             $message->save();
             $like->delete();
         }
-        return redirect()->route('home');
+
+        return $message->likes;
     }
 }

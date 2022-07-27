@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/subscriptions', [SubscriptionsController::class, 'index'])->name('subscriptions');
     Route::get('/{user}/status/{id}', [MessageController::class, 'show']);
 
-    // Filling_Navigation
+    // NavigationFilling
     Route::get('/message_subscription', MessageSubscription::class);
     Route::get('/{id}/message_comment', MessageComment::class);
 

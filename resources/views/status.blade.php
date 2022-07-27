@@ -1,22 +1,27 @@
 @extends('layouts.main')
 
+@section('title', 'Ветка')
 
 @section('content')
     <h2>Ветка</h2>
     @include('sections.message_show')
     @include('sections.comment_create')
     <br><hr>
-    <div id="comments"></div>    
+    <div id="comments"></div>
 
     <script>
-        $.get(
-            '/{{ $message->id }}/message_comment',
-            [],
-            function (response) {
-                $('#comments').html(response);
-                console.log('okey_comments');
-            }
-        );
+        function showComments() {
+            $.get(
+                '/{{ $message->id }}/message_comment',
+                [],
+                function (response) {
+                    $('#comments').html(response);
+                    like();
+                    console.log('okey_comments');
+                }
+            );
+        }
+        showComments();
         $('#contactForm').on('submit',function(event){
             event.preventDefault();
 
@@ -27,19 +32,12 @@
                 url: "/messages",
                 type:"POST",
                 data:{
-                    "_token": "{{ csrf_token() }}",
                     message:message,
                     message_id:message_id,
                 },
-                success:function(response){
+                success:function(){
                     $('#contactForm').trigger('reset');
-                    $.get(
-                        '/{{ $message->id }}/message_comment',
-                        [],
-                        function (response) {
-                            $('#comments').html(response);
-                        }
-                    );
+                    showComments();
                 },
             });
         });

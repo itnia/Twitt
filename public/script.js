@@ -1,17 +1,15 @@
-$('#contactForm').on('submit',function(event){
-    event.preventDefault();
-
-    let message = $('#message').val();
-
-    $.ajax({
-        url: "/messages",
-        type:"POST",
-        data:{
-            "_token": "{{ csrf_token() }}",
-            message:message,
-        },
-        success:function(response){
-            console.log(response);
-        },
+function like() {
+    $('.like').off('submit');
+    $('.like').on('submit',function(e){
+        e.preventDefault();
+        let id = $(this).attr('name');
+        $.post(
+            `/messages/like/${id}`,
+            [],
+            function (response) {
+                console.log(response);
+                $(`#like_${id}`).html(response);
+            }
+        );
     });
-});
+}

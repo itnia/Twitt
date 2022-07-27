@@ -9,14 +9,18 @@
     <div id="message_subscription"></div>
     
     <script>
-        $.get(
-            '/message_subscription',
-            [],
-            function (response) {
-                $('#message_subscription').html(response);
-                console.log('okey_message_subscription');
-            }
-        );
+        function showMessagesSubscriptions() {
+            $.get(
+                '/message_subscription',
+                [],
+                function (response) {
+                    $('#message_subscription').html(response);
+                    like();
+                    console.log('okey_message_subscription');
+                }
+            );
+        }
+        showMessagesSubscriptions();
         $('#contactForm').on('submit',function(event){
             event.preventDefault();
 
@@ -26,18 +30,11 @@
                 url: "/messages",
                 type:"POST",
                 data:{
-                    "_token": "{{ csrf_token() }}",
                     message:message,
                 },
-                success:function(response){
+                success:function(){
                     $('#contactForm').trigger('reset');
-                    $.get(
-                        '/message_subscription',
-                        [],
-                        function (response) {
-                            $('#message_subscription').html(response);
-                        }
-                    );
+                    showMessagesSubscriptions();
                 },
             });
         });

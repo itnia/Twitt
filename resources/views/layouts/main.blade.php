@@ -26,7 +26,7 @@
         </div>
     </div>
 
-    <!-- <script src="script.js"></script> -->
+    <script src="/script.js"></script>
     <script>
         $.ajaxSetup({
             headers: {

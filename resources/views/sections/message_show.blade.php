@@ -2,13 +2,11 @@
     {{ $message->message }}
 </div>
 <div>
-    <form action="/messages/like/{{ $message->id }}" method="post">
-        @csrf
-        @method('post')
-        <button>
-            Лайки{{ $message->likes }}
-        </button>
+    <form class="like"  name="{{ $message->id }}">
+        <input type="hidden">
+        <button>Лайки<span id="like_{{ $message->id }}">{{ $message->likes }}</span></button>
     </form>
+
     <a href="/{{ $message->user->name }}/status/{{ $message->id }}">Сылка</a>
 </div>
 <hr>

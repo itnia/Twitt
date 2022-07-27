@@ -1,5 +1,6 @@
 @extends('layouts.main')
 
+@section('title', 'Подписки')
 
 @section('content')
     <h2>Подписки</h2>
