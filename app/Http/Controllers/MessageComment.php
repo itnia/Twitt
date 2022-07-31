@@ -17,6 +17,6 @@ class MessageComment extends Controller
     {
         //
         $comments = Message::where('message_id', '=', $id)->orderBy('id', 'desc')->get();
-        return view('sections.message_subscription', ['messages' => $comments]);
+        return view('sections.message_group', ['messages' => $comments]);
     }
 }

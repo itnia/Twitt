@@ -7,5 +7,6 @@
 <ul>
     <li><a href="/">Главная</a></li>
     <li><a href="/subscriptions">Подписки</a></li>
+    <li><a href="/{{ Auth::user()->name }}">Профиль</a></li>
 </ul>
 {{ Auth::user()->name }}

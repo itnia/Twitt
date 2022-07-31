@@ -5,9 +5,7 @@
 @section('content')
     <h2>Подписки</h2>
     @foreach($users as $user)
-        <div>
-            {{ $user->name }}
-        </div>
+        <a href="{{ $user->name }}">{{ $user->name }}</a>
         @if(!$user->subscription_id)
         <form action="/subscriptions" method="post">
             @csrf

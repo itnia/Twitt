@@ -25,6 +25,6 @@ class MessageSubscription extends Controller
         }
         $messages = Message::whereNull('message_id')->whereIn('user_id', $arr)->orderBy('id', 'desc')->get();
 
-        return view('sections.message_subscription', ['messages' => $messages]);
+        return view('sections.message_group', ['messages' => $messages]);
     }
 }

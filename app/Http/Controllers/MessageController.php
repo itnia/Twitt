@@ -14,6 +14,8 @@ class MessageController extends Controller
     public function index()
     {
         // отоброжение в профиле только своих сообщений и коментариев
+        $messages = Message::where('user_id', Auth::id())->get();
+        return view('sections.message_group', ['messages' => $messages]);
     }
 
 
