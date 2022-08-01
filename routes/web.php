@@ -27,7 +27,7 @@ Route::delete('/login', [AuthController::class, 'destroy']);
 Route::view('/registration', 'layouts.reg')->name('registration');
 Route::post('/registration', [AuthController::class, 'reg'])->name('registration.store');
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'layout')->group(function () {
     //Messages
     Route::apiResource('/messages', MessageController::class);
     Route::post('/messages/like/{id}', [MessageController::class, 'like']);

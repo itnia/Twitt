@@ -16,7 +16,7 @@ class LayoutIsLoad
      */
     public function handle(Request $request, Closure $next)
     {
-        if (empty($request->input('layout'))) {
+        if (!$request->hasHeader('X-Header-Layout')) {
             return response()->view('layouts.main', ['url' => $request->path()]);
         }
         return $next($request);
