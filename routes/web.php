@@ -45,7 +45,7 @@ Route::middleware('auth', 'layout')->group(function () {
     Route::get('/{user}/likes', [UserController::class, 'likes']);
 
     // Navigation
-    Route::view('/home', 'home');
+    Route::view('/home', 'home')->name('home');
     Route::get('/subscriptions', [SubscriptionsController::class, 'index'])->name('subscriptions');
     Route::get('/{user}/status/{id}', [MessageController::class, 'show']);
     Route::get('/{user}', [UserController::class, 'index']);

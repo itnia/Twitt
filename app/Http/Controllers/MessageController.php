@@ -32,9 +32,9 @@ class MessageController extends Controller
     }
 
 
-    public function show(Request $request, $user, $id)
+    public function show(Request $request, $user, Message $id)
     {
-        return view('status', ['message' => Message::find($id)]);
+        return view('status', ['message' => $id]);
     }
 
 
