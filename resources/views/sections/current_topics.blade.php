@@ -4,9 +4,6 @@
 </form>
 <div>Актуальные темы</div>
 
-<div></div>
-<div></div>
-
 <script>
     
 </script>
