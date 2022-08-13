@@ -52,6 +52,36 @@
             );
         }
         showNavigation(url);
+        function showThemes() {
+            $.get(
+                '/themes',
+                [],
+                function (response) {
+                    $('#themes').html(response);
+                }
+            );
+        }
+        showThemes();
+
+        $(document).ready(function() {
+            $("#search").keyup(function() {
+
+                var name = $('#search').val();
+
+                if (name === "") {
+                    $("#display").html("");
+                }
+                else {
+                    $.post(
+                        '/search',
+                        {search:name},
+                        function(response) {
+                            $("#display").html(response);
+                        }
+                    );
+                }
+            });
+        });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>

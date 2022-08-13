@@ -1,9 +1,8 @@
 <div>Поиск</div>
 <form action="" method="post">
-    <input type="text">
+    <input type="text" id="search">
 </form>
+<div id="display"></div>
 <div>Актуальные темы</div>
 
-<script>
-    
-</script>
+<div id="themes"></div>

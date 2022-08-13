@@ -6,7 +6,7 @@
 <hr>
 <ul>
     <li><a id="nav_a" href="/home">Главная</a></li>
-    <li><a id="nav_b" href="/subscriptions">Подписки</a></li>
+    <li><a id="nav_b" href="/correspondence">Переписка</a></li>
     <li><a id="nav_c" href="/{{ Auth::user()->name }}">Профиль</a></li>
 </ul>
 {{ Auth::user()->name }}
@@ -19,7 +19,7 @@
     });
     $('#nav_b').on('click',function(e){
         e.preventDefault();
-        showNavigation('/subscriptions');
+        showNavigation('/correspondence');
     });
     $('#nav_c').on('click',function(e){
         e.preventDefault();

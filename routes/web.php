@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MessageSubscription;
 use App\Http\Controllers\MessageComment;
 use App\Http\Controllers\UserController;
+use Illuminate\Http\Request;
 
 use App\Models\Message;
 /*
@@ -36,6 +37,16 @@ Route::middleware('auth', 'layout')->group(function () {
     Route::post('/subscriptions', [SubscriptionsController::class, 'store']);
     Route::delete('/subscriptions', [SubscriptionsController::class, 'destroy']);
 
+    // Themes #
+    Route::get('/themes', function () {
+        return 'themes';
+    });
+
+    // Search
+    Route::post('/search', function (Request $request) {
+        return $request->search;
+    });
+
     // NavigationFilling
     Route::get('/message_subscription', MessageSubscription::class);
     Route::get('/{id}/message_comment', MessageComment::class);
@@ -46,6 +57,7 @@ Route::middleware('auth', 'layout')->group(function () {
 
     // Navigation
     Route::view('/home', 'home')->name('home');
+    Route::view('/correspondence', 'correspondence');
     Route::get('/subscriptions', [SubscriptionsController::class, 'index'])->name('subscriptions');
     Route::get('/{user}/status/{id}', [MessageController::class, 'show']);
     Route::get('/{user}', [UserController::class, 'index']);
