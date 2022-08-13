@@ -46,6 +46,9 @@ Route::middleware('auth', 'layout')->group(function () {
     Route::post('/search', function (Request $request) {
         return $request->search;
     });
+    Route::get('/search', function () {
+        return view('search');
+    });
 
     // NavigationFilling
     Route::get('/message_subscription', MessageSubscription::class);
