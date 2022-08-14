@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MessageSubscription;
 use App\Http\Controllers\MessageComment;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Http\Request;
 
 use App\Models\Message;
@@ -29,7 +30,7 @@ Route::view('/registration', 'layouts.reg')->name('registration');
 Route::post('/registration', [AuthController::class, 'reg'])->name('registration.store');
 
 Route::middleware('auth', 'layout')->group(function () {
-    //Messages
+    // Messages
     Route::apiResource('/messages', MessageController::class);
     Route::post('/messages/like/{id}', [MessageController::class, 'like']);
     
@@ -46,9 +47,12 @@ Route::middleware('auth', 'layout')->group(function () {
     Route::post('/search', function (Request $request) {
         return $request->search;
     });
-    Route::get('/search', function () {
-        return view('search');
-    });
+
+    // NavigationSearch
+    Route::get('/search', [SearchController::class, 'index']);
+    Route::get('/search/popular', [SearchController::class, 'popular']);
+    Route::get('/search/last', [SearchController::class, 'last']);
+    Route::get('/search/peoples', [SearchController::class, 'peoples']);
 
     // NavigationFilling
     Route::get('/message_subscription', MessageSubscription::class);
