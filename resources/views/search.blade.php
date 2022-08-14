@@ -1,8 +1,8 @@
 <h2>Поиск</h2>
-<div class="row">
-    <div class="col text-center"><a id="search_a" href=""><span>Популярное</span></a></div>
-    <div class="col text-center"><a id="search_b" href=""><span>Последнее</span></a></div>
-    <div class="col text-center"><a id="search_c" href=""><span>Люди</span></a></div>
+<div class="row" id="search_nav">
+    <div class="col text-center"><span><a href="/search/popular">Популярное</a></span></div>
+    <div class="col text-center"><span><a href="/search/last">Последнее</a></span></div>
+    <div class="col text-center"><span><a href="/search/peoples">Люди</a></span></div>
 </div>
 <div id="search_display"></div>
 
@@ -18,19 +18,12 @@
             }
         );
     }
+    
     showSearch('/search/popular');
-</script>
-<script>
-    $('#search_a').on('click',function(e){
+
+    $('#search_nav').on('click',function(e){
         e.preventDefault();
-        showSearch('/search/popular');
-    });
-    $('#search_b').on('click',function(e){
-        e.preventDefault();
-        showSearch('/search/last');
-    });
-    $('#search_c').on('click',function(e){
-        e.preventDefault();
-        showSearch('/search/peoples');
+        let nav = e.target;
+        showSearch(nav.getAttribute('href'));
     });
 </script>
