@@ -15,19 +15,23 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
-<body>
+<body style="overflow-y: scroll">     
     <div class="container">
         <div class="row">
             <div class="col-1"></div>
-            <div class="col-2">
-                @include('sections.navigation')
+            <div class=" col-2 border-start border-end min-vh-100">
+                <div class="sticky-top">
+                    @include('main.navigation')
+                </div>                
             </div>
-            <div class="col-5">
+            <div class="col-6">
                 @yield('content')
                 <div id="content"></div>
             </div>
-            <div class="col-3">
-                @include('sections.current_topics')
+            <div class="col-2 border-start border-end min-vh-100">
+                <div class="sticky-top">
+                    @include('main.current_topics')
+                </div>
             </div>
             <div class="col-1"></div>
         </div>
