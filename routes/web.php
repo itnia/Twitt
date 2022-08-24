@@ -31,7 +31,6 @@ Route::view('/registration', 'layouts.reg')->name('registration');
 Route::post('/registration', [AuthController::class, 'reg'])->name('registration.store');
 
 Route::middleware('auth', 'layout')->group(function () {
-    Route::get('/parser', [ParserController::class, 'index']);
 
     // Messages
     Route::apiResource('/messages', MessageController::class);

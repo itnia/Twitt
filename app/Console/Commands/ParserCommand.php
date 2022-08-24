@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Models\Card;
+use App\Jobs\Parser;
 
 class ParserCommand extends Command
 {
@@ -50,9 +50,8 @@ class ParserCommand extends Command
             $listCards[$key]['name'] = trim($name->nodeValue);
             $listCards[$key]['price'] = preg_replace('/[^0-9]/', '', $prices[$key]->nodeValue)/100;
             $listCards[$key]['desc'] = trim($descs[$key]->nodeValue);
+            Parser::dispatch($listCards[$key]);
+            sleep(1);
         }
-
-        Card::insert($listCards);
-        return 0;
     }
 }
