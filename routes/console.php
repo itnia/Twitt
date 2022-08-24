@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Artisan;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
+
+Artisan::command('send:emails', function(){
+    $this->comment('Processing');
+    app(UserController::class)->sendEmails();
+    $this->comment('Processed');
+});
