@@ -22,6 +22,7 @@
             <div class=" col-2 border-start border-end min-vh-100">
                 <div class="sticky-top">
                     @include('main.navigation')
+                    <a href="/parser">Parser</a>
                 </div>                
             </div>
             <div class="col-6">

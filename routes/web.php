@@ -8,6 +8,7 @@ use App\Http\Controllers\MessageSubscription;
 use App\Http\Controllers\MessageComment;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ParserController;
 use Illuminate\Http\Request;
 
 use App\Models\Message;
@@ -30,6 +31,8 @@ Route::view('/registration', 'layouts.reg')->name('registration');
 Route::post('/registration', [AuthController::class, 'reg'])->name('registration.store');
 
 Route::middleware('auth', 'layout')->group(function () {
+    Route::get('/parser', [ParserController::class, 'index']);
+
     // Messages
     Route::apiResource('/messages', MessageController::class);
     Route::post('/messages/like/{id}', [MessageController::class, 'like']);
