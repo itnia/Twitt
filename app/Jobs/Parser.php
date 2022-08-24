@@ -10,7 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Card;
 
-class Parser implements ShouldQueue
+class Parser implements ShouldQueue, ShouldBeUnique
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -57,7 +57,5 @@ class Parser implements ShouldQueue
 
         Card::insert($listCards);
         return 0;
-
-        // Parser::dispatch(); - отправка в очередь
     }
 }
