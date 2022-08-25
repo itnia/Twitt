@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Jobs\Parser;
+use App\Events\ParserProcessed;
 
 class ParserCommand extends Command
 {
@@ -46,13 +47,10 @@ class ParserCommand extends Command
         $prices = $xPath->query("//span[@class ='PriceBlock__PriceValue']");
         $descs = $xPath->query("//div[@class ='ModelList__DescBlock hidden-xs']");
         
-        $key = 0;
-        //foreach ($names as $key => $name) {
-            $listCards[$key]['name'] = trim($name->nodeValue);
-            $listCards[$key]['price'] = preg_replace('/[^0-9]/', '', $prices[$key]->nodeValue)/100;
-            $listCards[$key]['desc'] = trim($descs[$key]->nodeValue);
-            //Parser::dispatch($listCards[$key]);
-        //}
-        // сдесь генерируется событие
+        $listCard['name'] = trim($names[0]->nodeValue);
+        $listCard['price'] = preg_replace('/[^0-9]/', '', $prices[0]->nodeValue)/100;
+        $listCard['desc'] = trim($descs[0]->nodeValue);
+
+        ParserProcessed::dispatch($listCard);
     }
 }
