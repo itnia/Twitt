@@ -45,13 +45,14 @@ class ParserCommand extends Command
         $names = $xPath->query("//div[@class ='ModelList__NameBlock']");
         $prices = $xPath->query("//span[@class ='PriceBlock__PriceValue']");
         $descs = $xPath->query("//div[@class ='ModelList__DescBlock hidden-xs']");
-
-        foreach ($names as $key => $name) {
+        
+        $key = 0;
+        //foreach ($names as $key => $name) {
             $listCards[$key]['name'] = trim($name->nodeValue);
             $listCards[$key]['price'] = preg_replace('/[^0-9]/', '', $prices[$key]->nodeValue)/100;
             $listCards[$key]['desc'] = trim($descs[$key]->nodeValue);
-            Parser::dispatch($listCards[$key]);
-            sleep(1);
-        }
+            //Parser::dispatch($listCards[$key]);
+        //}
+        // сдесь генерируется событие
     }
 }
