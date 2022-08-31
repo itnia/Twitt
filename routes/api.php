@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthApiController;
+use App\Http\Controllers\AuthJWTController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,10 +15,6 @@ use App\Http\Controllers\AuthApiController;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
 Route::group([
 
     'middleware' => 'api',
@@ -26,17 +22,18 @@ Route::group([
 
 ], function ($router) {
 
-    Route::post('login', [AuthApiController::class, 'login']);
-    Route::post('logout', [AuthApiController::class, 'logout']);
-    Route::post('refresh', [AuthApiController::class, 'refresh']);
-    Route::post('me', [AuthApiController::class, 'me']);
+    Route::post('login', [AuthJWTController::class, 'login']);
+    Route::post('logout', [AuthJWTController::class, 'logout']);
+    Route::post('refresh', [AuthJWTController::class, 'refresh']);
+    Route::post('me', [AuthJWTController::class, 'me']);
 
 });
 
-Route::middleware(['api', 'jwt'])->group(function () {
+Route::middleware(['jwt.auth'])->group(function () {
 
-    Route::get('/post', function (Request $request) {
-        return 'Okey';
-    });
+    Route::store('/posts', [PostController::class, 'store']);
+    Route::show('/posts/{post}', [PostController::class, 'show']);
+    Route::patch('/posts/{post}', [PostController::class, 'update']);
+    Route::delete('/posts/{post}', [PostController::class, 'destroy']);
 
 });
