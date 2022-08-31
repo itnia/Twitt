@@ -9,6 +9,7 @@ use App\Http\Controllers\MessageComment;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ParserController;
+use App\Http\Controllers\DownloadController;
 use Illuminate\Http\Request;
 
 use App\Models\Message;
@@ -22,6 +23,9 @@ use App\Models\Message;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/download', [DownloadController::class, 'download']);
+
 
 // Route::redirect('/', '/home');
 // Route::view('/login', 'layouts.login')->name('login');
