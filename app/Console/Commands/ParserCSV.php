@@ -12,7 +12,7 @@ class ParserCSV extends Command
      *
      * @var string
      */
-    protected $signature = 'command:parcerCSV {file}';
+    protected $signature = 'parcerCSV {file}';
 
     /**
      * The console command description.

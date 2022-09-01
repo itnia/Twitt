@@ -13,7 +13,7 @@ class ParserCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'command:parser';
+    protected $signature = 'parser';
 
     /**
      * The console command description.
