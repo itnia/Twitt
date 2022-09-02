@@ -25,6 +25,7 @@ use App\Models\Message;
 */
 
 Route::get('/download', [DownloadController::class, 'download']);
+Route::get('/download/xlsx', [DownloadController::class, 'downloadXLSX']);
 
 
 // Route::redirect('/', '/home');

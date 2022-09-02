@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Data;
+use App\Exports\DataExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DownloadController extends Controller
 {
@@ -17,5 +19,9 @@ class DownloadController extends Controller
         }
 
         return response()->download('file.csv');
+    }
+
+    public function downloadXLSX () {
+        return Excel::download(new DataExport, 'data.xlsx');
     }
 }
