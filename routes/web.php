@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ParserController;
 use App\Http\Controllers\DownloadController;
+use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 
 use App\Models\Message;
@@ -26,6 +27,9 @@ use App\Models\Message;
 
 Route::get('/download', [DownloadController::class, 'download']);
 Route::get('/download/xlsx', [DownloadController::class, 'downloadXLSX']);
+
+Route::view('/posts', 'posts');
+Route::get('/posts/page', [PostController::class, 'paginate']);
 
 
 // Route::redirect('/', '/home');
