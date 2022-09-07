@@ -37,3 +37,10 @@ Route::middleware(['jwt.auth'])->group(function () {
     Route::delete('/posts/{post}', [PostController::class, 'destroy']);
 
 });
+
+Route::get('/', function () {
+    return response()->json([
+        'name' => 'Abigail',
+        'state' => 'CA',
+    ]);
+});

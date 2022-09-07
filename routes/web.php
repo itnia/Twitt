@@ -31,6 +31,10 @@ Route::get('/download/xlsx', [DownloadController::class, 'downloadXLSX']);
 Route::view('/posts', 'posts');
 Route::get('/posts/page', [PostController::class, 'paginate']);
 
+Route::get('/', function () {
+    return 'test';
+});
+
 
 // Route::redirect('/', '/home');
 // Route::view('/login', 'layouts.login')->name('login');
