@@ -25,6 +25,15 @@ use App\Models\Message;
 |
 */
 
+use App\Events\WebSocket;
+
+Route::get('/ws/action', function (Request $request) {
+    WebSocket::dispatch($data = $request->name);
+    return $request->name;
+});
+
+
+
 Route::get('/ws', function () {
     return view('ws');
 });
