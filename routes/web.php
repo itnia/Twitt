@@ -25,6 +25,10 @@ use App\Models\Message;
 |
 */
 
+Route::get('/ws', function () {
+    return view('ws');
+});
+
 Route::get('/download', [DownloadController::class, 'download']);
 Route::get('/download/xlsx', [DownloadController::class, 'downloadXLSX']);
 
