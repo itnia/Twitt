@@ -25,28 +25,29 @@ use App\Models\Message;
 |
 */
 
-use App\Events\WebSocket;
-
-Route::get('/ws/action', function (Request $request) {
-    WebSocket::dispatch($data = $request->name);
-    return $request->name;
-});
-
-
-
-Route::get('/ws', function () {
-    return view('ws');
-});
-
-Route::get('/download', [DownloadController::class, 'download']);
-Route::get('/download/xlsx', [DownloadController::class, 'downloadXLSX']);
-
-Route::view('/posts', 'posts');
-Route::get('/posts/page', [PostController::class, 'paginate']);
-
 Route::get('/', function () {
-    return 'test';
+    return view('app');
 });
+
+// use App\Events\WebSocket;
+
+// Route::get('/ws/action', function (Request $request) {
+//     WebSocket::dispatch($data = $request->name);
+//     return $request->name;
+// });
+
+
+
+// Route::get('/ws', function () {
+//     return view('ws');
+// });
+
+// Route::get('/download', [DownloadController::class, 'download']);
+// Route::get('/download/xlsx', [DownloadController::class, 'downloadXLSX']);
+
+// Route::view('/posts', 'posts');
+// Route::get('/posts/page', [PostController::class, 'paginate']);
+
 
 
 // Route::redirect('/', '/home');
