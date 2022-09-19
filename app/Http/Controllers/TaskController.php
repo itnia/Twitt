@@ -7,6 +7,11 @@ use App\Models\Task;
 
 class TaskController extends Controller
 {
+    public function index () {
+        $data = Task::all();
+        return $data;
+    }
+
     public function store (Request $request) {
         Task::create([
             'task' => $request->task,
@@ -14,11 +19,12 @@ class TaskController extends Controller
         ]);
     }
 
-    public function update ($key) {
-        return 'update'.$key;
+    public function update (Task $task) {
+        $task->notice = !$task->notice;
+        $task->save();
     }
 
-    public function destroy ($key) {
-        return 'destroy'.$key;
+    public function destroy ($id) {
+        Task::destroy($id);
     }
 }

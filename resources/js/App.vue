@@ -9,17 +9,19 @@
         </div>
     </div>
 
-    <div v-for="(t, index) in tasks">
+    <div v-for="value in tasks">
         <div class="form-check">
             <div class="row g-3">
                 <div class="col">
-                    <input @click="notice(index)" class="form-check-input" type="checkbox" value="" :id="'task_' + index">
-                    <label class="form-check-label" :for="'task_' + index">
-                        {{ t }}
+                    <input @click="notice(value.id)" class="form-check-input" type="checkbox" value="" :id="'task_' + value.id">
+                    <label class="form-check-label" :for="'task_' + value.id">
+                        <div>
+                            {{ value.task }}
+                        </div>
                     </label>
                 </div>
                 <div class="col-auto">
-                    <button @click="deleteTask(index)">Delete</button>
+                    <button @click="deleteTask(value.id)">Delete</button>
                 </div>
             </div>
         </div>
@@ -32,43 +34,34 @@
         data() {
             return {
                 task: null,
-                tasks: [],
+                tasks: null
             }
+        },
+        mounted() {
+            this.indexTasks();
         },
         methods: {
             indexTasks() {
                 axios.get('/api/task')
-                    .then(function (response) {
-                        // обработка успешного запроса
-                        console.log(response.data);
+                    .then(response => {
+                        this.tasks = response.data;
                     })
             },
             add() {
                 if(this.task) {
-                    this.tasks.push(this.task);
                     axios.post('/api/task/store', {'task': this.task})
-                    .then(function (response) {
-                        // обработка успешного запроса
-                        console.log(response.data);
-                    })
                     this.task = "";
+                    this.indexTasks();
                 }
             },
-            deleteTask(key) {
-                this.tasks.splice(key, 1);
-                axios.delete('/api/task/' + key)
-                    .then(function (response) {
-                        // обработка успешного запроса
-                        console.log(response.data);
-                    })
+            deleteTask(id) {
+                axios.delete('/api/task/' + id)
+                this.indexTasks();
             },
-            notice(key) {
+            notice(id) {
                 // изменить текст на зачеркнутый
-                axios.patch('/api/task/' + key)
-                    .then(function (response) {
-                        // обработка успешного запроса
-                        console.log(response.data);
-                    })
+                axios.patch('/api/task/' + id)
+                this.indexTasks();
             }
         }
     }
