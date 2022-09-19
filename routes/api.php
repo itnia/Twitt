@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthJWTController;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,17 @@ Route::middleware(['jwt.auth'])->group(function () {
     Route::delete('/posts/{post}', [PostController::class, 'destroy']);
 
 });
+
+Route::get('/test', function () {
+    return 'okey test';
+});
+
+Route::get('/task', [TaskController::class, 'index']);
+Route::post('/task/store', [TaskController::class, 'store']);
+Route::patch('/task/{task}', [TaskController::class, 'update']);
+Route::delete('/task/{task}', [TaskController::class, 'destroy']);
+
+
 
 Route::get('/', function () {
     return response()->json([

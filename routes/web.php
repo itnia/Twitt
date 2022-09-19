@@ -28,6 +28,9 @@ use App\Models\Message;
 Route::get('/', function () {
     return view('app');
 });
+Route::get('/test', function () {
+    return 'okey test';
+});
 
 // use App\Events\WebSocket;
 
