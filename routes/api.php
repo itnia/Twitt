@@ -27,32 +27,37 @@ Route::group([
     Route::post('logout', [AuthJWTController::class, 'logout']);
     Route::post('refresh', [AuthJWTController::class, 'refresh']);
     Route::post('me', [AuthJWTController::class, 'me']);
-
+    Route::post('reg', [AuthJWTController::class, 'reg']);
+    
 });
 
 Route::middleware(['jwt.auth'])->group(function () {
+    // Route::post('/posts', [PostController::class, 'store']);
+    // Route::get('/posts/{post}', [PostController::class, 'show']);
+    // Route::patch('/posts/{post}', [PostController::class, 'update']);
+    // Route::delete('/posts/{post}', [PostController::class, 'destroy']);
+    
+    Route::post('test', function() {
+        return "okey";
+    });
 
-    Route::post('/posts', [PostController::class, 'store']);
-    Route::get('/posts/{post}', [PostController::class, 'show']);
-    Route::patch('/posts/{post}', [PostController::class, 'update']);
-    Route::delete('/posts/{post}', [PostController::class, 'destroy']);
+    Route::post('/task', [TaskController::class, 'index']);
+    Route::post('/task/store', [TaskController::class, 'store']);
+    Route::patch('/task/{task}', [TaskController::class, 'update']);
+    Route::delete('/task/{task}', [TaskController::class, 'destroy']);
 
 });
+
 
 Route::get('/test', function () {
     return 'okey test';
 });
 
-Route::get('/task', [TaskController::class, 'index']);
-Route::post('/task/store', [TaskController::class, 'store']);
-Route::patch('/task/{task}', [TaskController::class, 'update']);
-Route::delete('/task/{task}', [TaskController::class, 'destroy']);
 
 
-
-Route::get('/', function () {
-    return response()->json([
-        'name' => 'Abigail',
-        'state' => 'CA',
-    ]);
-});
+// Route::get('/', function () {
+//     return response()->json([
+//         'name' => 'Abigail',
+//         'state' => 'CA',
+//     ]);
+// });

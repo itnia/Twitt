@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AuthJWTController extends Controller
 {
@@ -14,7 +15,7 @@ class AuthJWTController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login', 'reg']]);
     }
 
     /**
@@ -79,5 +80,18 @@ class AuthJWTController extends Controller
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60
         ]);
+    }
+
+    public function reg()
+    {
+        $credentials = request(['name', 'password']);
+        
+        $user = User::where('name', $credentials['name'])->first();
+
+        if (isset($user->name)) {
+            return false;
+        }
+
+        User::create($credentials);
     }
 }
