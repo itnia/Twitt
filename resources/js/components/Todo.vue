@@ -11,11 +11,11 @@
     </div>
 
     <div v-for="value in tasks">
-        <div @click="$store.state.value = value, $router.push('/task')" class="form-check">
+        <div class="form-check">
             <div class="row g-3">
                 <div class="col">
-                    <input @click="notice(value.id)" class="form-check-input" type="checkbox" value="" :id="'task_' + value.id">
-                    <span class="form-check-label" :for="'task_' + value.id">
+                    <input @click="notice(value.id)" class="form-check-input" type="checkbox" :checked="value.notice">
+                    <span @click="$store.state.value = value, $router.push('/task')">
                         <div v-bind:class="value.notice ? 'text-decoration-line-through' : ''">
                             {{ value.task }}
                         </div>
