@@ -1,6 +1,5 @@
 <template>
-    <auth @auth="auth = true" v-if="!auth"></auth>
-    <todo @exit="auth = false" v-else></todo>
+    <router-view></router-view>
 </template>
 
 <script>
@@ -11,15 +10,16 @@
     export default {
         data() {
             return {
-                auth: false,
                 err: false
             }
         },
         created() {
             axios.post('/api/auth/me')
-            .catch(error => {this.err = true})
             .then(responce => {
-                this.auth= this.err ? false : true;
+                this.$router.push('/todo')
+            })
+            .catch(error => {
+                this.err = true
             })
         },
         methods: {

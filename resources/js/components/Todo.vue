@@ -11,15 +11,15 @@
     </div>
 
     <div v-for="value in tasks">
-        <div class="form-check">
+        <div @click="$store.state.value = value, $router.push('/task')" class="form-check">
             <div class="row g-3">
                 <div class="col">
                     <input @click="notice(value.id)" class="form-check-input" type="checkbox" value="" :id="'task_' + value.id">
-                    <label class="form-check-label" :for="'task_' + value.id">
+                    <span class="form-check-label" :for="'task_' + value.id">
                         <div v-bind:class="value.notice ? 'text-decoration-line-through' : ''">
                             {{ value.task }}
                         </div>
-                    </label>
+                    </span>
                 </div>
                 <div class="col-auto">
                     <button @click="deleteTask(value.id)">Delete</button>
@@ -41,11 +41,10 @@
         mounted() {
             this.indexTasks();
         },
-        emits: ['exit'],
         methods: {
             exit () {
                 axios.post('/api/auth/logout');
-                this.$emit('exit');
+                this.$router.push('/');
             },
             indexTasks() {
                 axios.post('/api/task')

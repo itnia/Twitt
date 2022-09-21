@@ -51,7 +51,6 @@
                 err: false
             }
         },
-        emits: ['auth'],
         methods: {
             win(){
                 this.reg = !this.reg;
@@ -71,7 +70,7 @@
                         if(!this.err) {
                             localStorage.setItem('jwt', 'Bearer ' + responce.data.access_token);
                             axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwt');
-                            this.$emit('auth');
+                            this.$router.push('/todo');
                         }
                     })
             }

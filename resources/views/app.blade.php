@@ -14,7 +14,7 @@
 </head>
 <body>
 	<div class="container">
-		<div id="app"></div>	
+		<div id="app"></div>
 	</div>
 	@vite('resources/js/app.js')
 	<script 
